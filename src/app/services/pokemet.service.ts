@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Result, Pokemons } from '../interfaces/interfaces';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ export class PokemetServicioService {
   constructor(private http:HttpClient) { }
 
   getpokeMetodo(){
-    return this.http.get("https://pokeapi.co/api/v2/pokemon/");
+    return this.http.get<Pokemons>("https://pokeapi.co/api/v2/pokemon/");
     }
     
 
