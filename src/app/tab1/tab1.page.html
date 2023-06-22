@@ -1,18 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      POKEMON
+      Pokémon Types
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-  <ion-card *ngFor="let result of pokeArre">
-    <ion-card-header>
-      <ion-card-title>{{result.name}}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
- 
+<ion-content>
+  <ion-list>
+    <ion-list-header>Pokémon Types</ion-list-header>
+    <ion-item *ngFor="let type of getObjectKeys(pokemonList)">
+      <ion-button expand="full" (click)="showPokemonList(type)">
+        {{ type }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngFor="let pokemonType of getObjectKeys(pokemonList)">
+    <ion-list-header>{{ pokemonType }}</ion-list-header>
+    <ion-item *ngFor="let pokemon of pokemonList[pokemonType]">
+      <!-- Mostrar información del Pokémon aquí -->
+      <ion-label>{{ pokemon.name }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
