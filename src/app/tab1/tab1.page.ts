@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemetServicioService } from '../services/pokemet.service';
-import { Result, Pokemon, } from '../interfaces/interfaces';
+import { Result, Pokemon } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -8,12 +8,13 @@ import { Result, Pokemon, } from '../interfaces/interfaces';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
+
   pokeArre: Result[] = [];
 
   constructor(private propokemon: PokemetServicioService) {}
 
   ngOnInit() {
-    this.propokemon.getpokeMetodo().subscribe((Respuestapoke) => {
+    this.propokemon.getpokeMetodo().subscribe(Respuestapoke => {
       console.log(Respuestapoke);
       this.pokeArre = Respuestapoke.results;
       this.getPokemonImages();
@@ -27,4 +28,6 @@ export class Tab1Page implements OnInit {
       });
     }
   }
+  
 }
+

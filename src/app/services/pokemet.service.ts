@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Result, Pokemons, Pokemon } from '../interfaces/interfaces';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokemetServicioService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getpokeMetodo(){
-    return this.http.get<Pokemons>("https://pokeapi.co/api/v2/pokemon/");
-    }
+  getpokeMetodo(): Observable<Pokemons> {
+    return this.http.get<Pokemons>("https://pokeapi.co/api/v2/pokemon/").pipe(
+    
+    );
+  }
 
-    getPokemonImageURL(pokemon: Pokemon): string {
-      const pokemonId = this.extractPokemonIdFromUrl(pokemon.url);
-      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
-    }
-    
-    private extractPokemonIdFromUrl(url: string): string {
-      // Extracción del ID del Pokémon a partir de la URL de la PokeAPI
-      const segments = url.split('/').filter(segment => segment.trim() !== '');
-      const pokemonId = segments[segments.length - 1];
-      return pokemonId;
-    }
-    
+  getPokemonImageURL(pokemon: Pokemon): Observable<string> {
+    const pokemonId = this.extractPokemonIdFromUrl(pokemon.url);
+    const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+    return this.http.get(imageUrl, { responseType: 'blob' }).pipe(
+      map((blob: Blob) => {
+        const url = URL.createObjectURL(blob);
+        return url;
+      }),
+  
+    );
+  }
+  private extractPokemonIdFromUrl(url: string): string {
+    // Extracción del ID del Pokémon a partir de la URL de la PokeAPI
+    const segments = url.split('/').filter(segment => segment.trim() !== '');
+    const pokemonId = segments[segments.length - 1];
+    return pokemonId;
+  }
+
 }
