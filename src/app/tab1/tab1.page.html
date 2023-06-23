@@ -7,14 +7,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<!-- <ion-label *ngFor="let result of pokeArreglo">{{result.name}} - </ion-label> -->
-
-    <ion-card *ngFor="let result of pokeArreglo">
+  <ion-card *ngFor="let result of pokeArreglo" (click)="poketipo(result.name)" [routerLink]="['/tabs/tab1/listapoke']">
     
-      <ion-card-header>
+    <ion-card-header>
         <ion-card-title>{{result.name}}</ion-card-title>
-        
-      </ion-card-header>
-    </ion-card>
-  
+    </ion-card-header>
+  </ion-card>
 </ion-content>
