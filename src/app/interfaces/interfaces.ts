@@ -6,6 +6,8 @@ export interface RootObject {
 }
 
 export interface Result {
+  id: number;
   name: string;
   url: string;
+  imageUrl: string;
 }
