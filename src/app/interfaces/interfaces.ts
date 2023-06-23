@@ -16,15 +16,16 @@ export interface RootObjectPokemon {
   pokemon: Pokemon[];
   slot: number;
 }
-
+*/
 export interface Pokemon {
   name: string;
   url: string;
 }
 
-*/
 
-
+export interface RootObject {
+  results: Result[];
+}
 
 
 

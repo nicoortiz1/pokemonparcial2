@@ -23,5 +23,8 @@ export class PokeServicioService {
     getinfoPersonajes(nameTipo: string){
       return this.http.get<RootObjectPokemon>("https://pokeapi.co/api/v2/type/"+ nameTipo);      
     }
-
+  
+    getFiltroLetra(letra: string){
+      return this.http.get<RootObjectPokemon>("https://pokeapi.co/api/v2/type/"+ letra);      
+    }
 }

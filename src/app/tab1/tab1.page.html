@@ -1,16 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Tipos de Pokemon
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let result of pokeArreglo" (click)="poketipo(result.name)" [routerLink]="['/tabs/tab1/listapoke']">
-    
-    <ion-card-header>
-        <ion-card-title>{{result.name}}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="filtrarPorBusqueda()" placeholder="Buscar"></ion-searchbar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let result of tiposPokemonFiltrados">
+        <ion-card (click)="poketipo(result.name)" [routerLink]="['/tabs/tab1/listapoke']">
+          <img style="width: 100px; height: 100px;" alt="" src="https://www.pngall.com/wp-content/uploads/4/Pokemon-Pokeball-PNG-Photo.png" />
+          <ion-card-header>
+            <ion-card-title>{{ result.name }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
