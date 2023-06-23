@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tab1Page } from '../tab1.page';
 import { PokeServicioService } from 'src/app/services/pokemet.service';
 import { ActivatedRoute } from '@angular/router';
+import {  Pokemon, Result, RootObject } from 'src/app/interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -11,15 +12,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListapokePage implements OnInit {
 
+  arregloInfoPersonajes: Pokemon[]=[];
+
   constructor(private PokeServicioService:PokeServicioService, private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
-    /*this.PokeServicioService.getNamePoke(this.PokeServicioService.infoName).subscribe(respuestaPokemon =>{
+    this.PokeServicioService.getinfoPersonajes(this.PokeServicioService.pokeTipoFinal).subscribe(respuestaPokemon =>{
       console.log(respuestaPokemon);
-    })*/
-    console.log(this.PokeServicioService.infoName);
-  }
+      this.arregloInfoPersonajes=respuestaPokemon.pokemon;
+  
+    })
 
   
 
+}
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Result, RootObject } from '../interfaces/interfaces';
+import { Result, RootObject, RootObjectPokemon } from '../interfaces/interfaces';
 
 
 @Injectable({
@@ -11,17 +11,17 @@ export class PokeServicioService {
   constructor(private http:HttpClient) { }
 
   getpokeMetodo(){
-    return this.http.get<RootObject>("https://pokeapi.co/api/v2/type/");
-    }
-    
-    infoName: string="";
-    asignarName(name: string){
-      this.infoName = name;
+    return this.http.get<RootObject>("https://pokeapi.co/api/v2/type");
     }
 
-    getNamePoke(name: string) {
-      return this.http.get<RootObject>("https://pokeapi.co/api/v2/pokemon/+name");
-    }
+    pokeTipoFinal: string="";
     
-      
+    getNamePoke(nameTipo: string) {
+      this.pokeTipoFinal = nameTipo;
     }
+
+    getinfoPersonajes(nameTipo: string){
+      return this.http.get<RootObjectPokemon>("https://pokeapi.co/api/v2/type/"+ nameTipo);      
+    }
+
+}
